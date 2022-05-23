@@ -45,7 +45,7 @@ layout: page
       <p>{{ page.description | markdownify }}</p>
 
       {%- if page.title -%}
-      <p> <a href="{{ page.url }}">
+      <p> <a class="page-link" href="{{ page.url | relative_url }}">
         <button type="button" class="btn btn-light btn-sm"> 
           <i class="bi bi-caret-right"></i> Para más info pincha aquí 
         </button>
