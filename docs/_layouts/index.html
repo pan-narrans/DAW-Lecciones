@@ -1,0 +1,60 @@
+---
+layout: page
+---
+
+{{ page.content }}
+
+{%- assign lecciones = site.pages | where:"subject", "BBDD" | group_by:"category" -%}
+
+<h2>Tabla de contenidos:</h2>
+{%- for category in lecciones -%}
+  {%- unless category.name == "" -%}
+  <figure>
+    <figcaption>{{ category.name }}:</figcaption
+    <ul>
+    {%- for page in category.items -%}
+      {%- unless page.menu-item -%}
+
+      <!--  -->
+      {%- if page.title -%}
+        <a href="#{{ page.title }}">
+          <li style="list-style: none;">{{ page.title }}</li>
+        </a>
+      {%- endif -%}
+
+      {%- endunless -%}
+    {% endfor %}
+    </ul>
+  </figure>
+  {%- endunless -%}
+{% endfor %}
+
+{%- for category in lecciones -%}
+  {%- unless category.name == "" -%}
+    <h2>{{ category.name }}:</h2>
+    <hr>
+
+    {%- for page in category.items -%}
+      {%- unless page.menu-item -%}
+
+      <!--  -->
+      {%- if page.title -%}
+        <h3  id="{{ page.title }}">{{ page.title }}:</h3>
+      {%- endif -%}
+
+      <p>{{ page.description | markdownify }}</p>
+
+      {%- if page.title -%}
+      <p> <a href="{{ page.url }}">
+        <button type="button" class="btn btn-light btn-sm"> 
+          <i class="bi bi-caret-right"></i> Para más info pincha aquí 
+        </button>
+      </a> </p>
+      {%- endif -%}
+
+      {%- endunless -%}
+    {% endfor %}
+
+    <br>
+  {%- endunless -%}
+{% endfor %}
