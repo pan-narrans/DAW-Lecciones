@@ -10,8 +10,7 @@ Esto es especialmente útil en consultas que se vayan a ejecutar varias veces se
 Aparte, nos permite evitar varios casos de inyección SQL.
 "
 ---
-
-- [Sintaxis](#sintaxis)
+- [Proceso a seguir](#proceso-a-seguir)
 
 {{ page.description }}
 

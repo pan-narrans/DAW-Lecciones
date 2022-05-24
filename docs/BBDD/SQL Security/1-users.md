@@ -7,6 +7,8 @@ description: "Ejemplos de como gestionar usuarios y sus privilegios."
 
 - [Usuarios](#usuarios)
   - [Crear usuarios](#crear-usuarios)
+  - [Mostrar usuarios](#mostrar-usuarios)
+  - [Eliminar usuarios](#eliminar-usuarios)
   - [Conectarse a la base de datos](#conectarse-a-la-base-de-datos)
 - [Privilegios](#privilegios)
   - [Dar privilegios](#dar-privilegios)
@@ -19,12 +21,28 @@ description: "Ejemplos de como gestionar usuarios y sus privilegios."
 
 El nombre de la cuenta se compone del nombre de usuario y el nombre del host a través del cual nos conectamos a la base de datos. En nuestro caso el host es `localhost` ya que trabajamos en un servidor local.
 
+Si no ponemos nada en la parte de host el usuario se crea como `username@%` y se puede conectar desde cualquier host.
+
 ```sql
 CREATE USER [IF NOT EXISTS] username@hostname 
 IDENTIFIED BY 'password';
 ```
 
+### Mostrar usuarios
+
+```sql
+SELECT user FROM mysql.user;
+```
+
+### Eliminar usuarios
+
+```sql
+DROP USER account_name;
+```
+
 ### Conectarse a la base de datos
+
+> Esto no funciona desde XAMPP, pero lo dejo a título informativo.
 
 ```sql
 mysql -u username -p
