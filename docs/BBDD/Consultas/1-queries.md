@@ -57,8 +57,7 @@ WHERE p.precio > p2.media;
 Dentro de un `JOIN`:
 
 ``` sql
--- Devuelve los nombres de los fabricantes y el nº de productos que tiene cada uno con
--- un precio superior o igual a 220 €.
+-- Devuelve los nombres de los fabricantes y el nº de productos que tiene cada uno con un precio superior o igual a 220 €.
 SELECT f.nombre as "Fabricante", COALESCE(p1.numero, 0) as "Nº productos" 
 FROM fabricante f 
 LEFT JOIN (SELECT COUNT(*) as numero, codigo_fabricante, precio
@@ -70,8 +69,7 @@ ON f.codigo = p1.codigo_fabricante;
 Con `NOT IN`:
 
 ``` sql
--- El nombre de los clientes que no hayan realizado pagos y el nombre de sus
--- representantes de ventas.
+-- El nombre de los clientes que no hayan realizado pagos y el nombre de sus representantes de ventas.
 SELECT cl1.nombre_cliente, e.nombre FROM cliente cl1
 INNER JOIN empleado e ON cl1.codigo_empleado_rep_ventas = e.codigo_empleado
 
@@ -95,8 +93,7 @@ Realiza un producto cartesiano de las tablas incluidas y devuelve los valores en
 ### Ejemplos de join
 
 ``` sql
--- Devuelve el nombre de todos los clientes, y en el caso de que tengan pedidos a su
--- nombre, los muestra todos.
+-- Devuelve el nombre de todos los clientes, y en el caso de que tengan pedidos a su nombre, los muestra todos.
 SELECT c.CustomerName, o.OrderID FROM Customers c
 LEFT JOIN Orders o ON c.CustomerID = o.CustomerID
 ORDER BY c.CustomerName;
@@ -106,8 +103,7 @@ Se pueden concatenar sin problemas.
 De esta forma podemos "saltar" de tabla en tabla.
 
 ```sql
--- Devuelve el nombre de todos los clientes y el de todos los productos que han pedido,
--- al igual que el nº de unidades de cada producto.
+-- Devuelve el nombre de todos los clientes y el de todos los productos que han pedido, al igual que el nº de unidades de cada producto.
 SELECT 
   cliente.nombre_cliente as "Nombre Cliente", 
   producto.nombre as "Nombre Producto", 
@@ -276,8 +272,7 @@ Nos permite comprobar si de un grupo de elementos (obtenido a partir de una subc
 Devuelve `true` si se cumple la condición marcada al comparar con **todos** los elementos.
 
 ``` sql
--- Devuelve el nombre del departamento con menor presupuesto y la cantidad que tiene
--- asignada.
+-- Devuelve el nombre del departamento con menor presupuesto y la cantidad que tiene asignada.
 SELECT dep.nombre, dep.presupuesto FROM departamento dep
 WHERE dep.presupuesto <= ALL (SELECT dep.presupuesto FROM departamento dep);
 ```

@@ -10,7 +10,7 @@ description: "Sintaxis SQL para programar scripts. Estructuras de control, decla
   - [If statement](#if-statement)
   - [Case statement](#case-statement)
   - [While statement](#while-statement)
-  - [Repeat Until statement](#repeat-until-statement)
+  - [Repeat statement](#repeat-statement)
   - [Loop statement](#loop-statement)
 
 ## Delimiter
@@ -123,7 +123,7 @@ WHILE <condition> DO
 END WHILE;
 ```
 
-### Repeat Until statement
+### Repeat statement
 
 A `do while` loop. It will iterate at least one time.
 
@@ -136,9 +136,29 @@ UNTIL <condition>
 END REPEAT;
 ```
 
+Example:
+
+```sql
+CREATE PROCEDURE RepeatDemo()
+BEGIN
+    DECLARE counter INT DEFAULT 1;
+    DECLARE result VARCHAR(100) DEFAULT '';
+    
+    REPEAT
+        SET result = CONCAT(result,counter,',');
+        SET counter = counter + 1;
+    UNTIL counter >= 10
+    END REPEAT;
+    
+    SELECT result;
+END$$
+```
+
 ### Loop statement
 
-We don't have no fancy `for` loops here in SQL. All we have is this old school, reliable and `spaghetti loop`.
+We don't have no fancy `for` loops here in SQL. All we have is this old school, reliable and 🍝 `spaghetti loop`.
+
+The `BREAK` statement is needed to exit the loop *(sooner or later we all need to exit our loop)*. The `ITERATE` statement for its part is opcional and behaves as a `continue`, fast-forwarding to the next iteration of the loop.
 
 Syntax:
 

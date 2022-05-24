@@ -5,6 +5,7 @@ description: "A function is a stored script returning a sole value. Their purpos
 
 - [Calling a function](#calling-a-function)
 - [Creating a function](#creating-a-function)
+- [Example](#example)
 
 {{ page.description }}
 
@@ -33,31 +34,55 @@ RETURNS datatype
 
 If a functions doesn't receive any parameters, we leave the `()` blank.
 
-```sql
-DROP FUNCTION IF EXISTS getIdLibro;
+## Example
 
-DELIMITER $$
+> Ejemplo sacado del examen.
+
+```sql
+DROP FUNCTION IF EXISTS getCategory;
+
+DELIMITER //
 
 /*
-  Recibe como parámetro el título del libro.
-  Devuelve el id de un libro.
+Función que toma como parámetro una fecha y devuelve a que categoría pertenece. 
+
+Esta  función debe calcular la edad con respecto a la fecha actual.
+
+INFANTIL  → de 8 a 10 años
+CADETE    → de 11 años a 14 años
+JUVENIL   → de 15 a 17 años.
+ADULTO    → mayores de 18 años.
 */
 
-CREATE FUNCTION getIdLibro (titulo VARCHAR(100))
-RETURNS INT(11)
+CREATE FUNCTION getCategory (fecha DATE)
+RETURNs VARCHAR(20)
 BEGIN
 
-RETURN(
-  SELECT libro.libro FROM libro
-  WHERE LOWER(libro.titulo) LIKE LOWER(titulo)
-);
+  DECLARE edad INT;
+  DECLARE categoria VARCHAR(20);
 
-END $$
+  SET edad = TIMESTAMPDIFF(YEAR,fecha,NOW());
+
+  IF edad >= 8 AND edad <= 10 THEN
+    SET categoria = "INFANTIL";
+  ELSEIF edad >= 11 AND edad <= 14 THEN
+    SET categoria = "CADETE";
+  ELSEIF edad >= 15 AND edad <= 17 THEN
+    SET categoria = "JUVENIL";
+  ELSEif edad >= 18 THEN
+    SET categoria = "ADULTO";
+  ELSE
+    SET categoria = "ERROR";
+  END IF;
+
+  RETURN categoria;
+
+END //
 
 DELIMITER ;
 
--- PRUEBAS
-SELECT libro.titulo, libro.libro,
-  getIdLibro(libro.titulo) 
-  AS "Libro Calculado" FROM libro;
+-- TESTS
+
+-- Muestra la categoría de todos los participantes
+SELECT getCategory(fecha) FROM participante;
 ```
