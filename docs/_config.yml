@@ -31,7 +31,6 @@ baseurl: /DAW-Lecciones/ # the subpath of your site, e.g. /blog
 #twitter_username: jekyllrb
 github_username:  pan-narrans
 
-
 # Build settings
 theme: minima
 plugins:
@@ -57,14 +56,11 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-defaults:
-# General
-  - scope:
-      path: "*/index.html"
-    values:
-      layout: "index"
-      menu-item: true
+header_pages:
+  - about.md
+  - BBDD/index.html
 
+defaults:
 # Bases de datos
   -
     scope:
