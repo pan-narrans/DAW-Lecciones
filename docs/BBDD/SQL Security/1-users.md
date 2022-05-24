@@ -14,6 +14,7 @@ description: "Ejemplos de como gestionar usuarios y sus privilegios."
   - [Dar privilegios](#dar-privilegios)
   - [Eliminar privilegios](#eliminar-privilegios)
   - [Mostrar privilegios](#mostrar-privilegios)
+- [Ejemplos](#ejemplos)
 
 ## Usuarios
 
@@ -90,29 +91,10 @@ Los privilegios se pueden conceder a distintos niveles:
 
 ### Dar privilegios
 
-Sintaxis:
-
 ```sql
 GRANT privilege [,privilege],.. 
 ON privilege_level 
 TO account_name;
-```
-
-Ejemplos:
-
-```sql
--- Otorga a bob privilegios de SELECT en la tabla 'employees'.
-GRANT SELECT
-ON employees
-TO bob@localhost;
-```
-
-```sql
--- Otorga a super todos los privilegios en la totalidad de la base de datos
--- 'classicmodels'.
-GRANT ALL 
-ON classicmodels.* 
-TO super@localhost;
 ```
 
 ### Eliminar privilegios
@@ -127,4 +109,47 @@ FROM user1 [, user2] ..;
 
 ```sql
 SHOW GRANTS FOR super@localhost;
+```
+
+## Ejemplos
+
+```sql
+CREATE USER ALEX IDENTIFIED BY '1234';
+```
+
+Permisos globales:
+
+```sql
+-- Damos y retiramos todos los permisos de forma global
+GRANT ALL ON *.* TO alex;
+REVOKE ALL ON *.* FROM alex; 
+```
+
+Permisos en una base de datos concreta:
+
+```sql
+-- Damos y retiramos permisos de inserción y selección en todos los elementos de la base de datos 'universidad'
+GRANT SELECT, INSERT ON universidad.* TO alex;
+REVOKE SELECT, INSERT ON universidad.* FROM alex;
+```
+
+Permisos para una única tabla:
+
+```sql
+-- Damos y retiramos permisos de inserción y selección en la tabla 'grado' de la base de datos ´universidad´
+GRANT SELECT, INSERT ON universidad.grado TO alex;
+REVOKE SELECT, INSERT ON universidad.grado FROM alex;
+```
+
+Permisos por columnas:
+
+```sql
+-- Damos permisos de selección en las columnas 'id' y 'nif' y actualización en la columna 'nif' en la tabla 'persona' de la base de datos ´universidad´
+GRANT 
+ SELECT (id, nif),
+ UPDATE (nif)
+ON universidad.persona TO alex;
+
+-- Retiramos el permiso de selección de la columna 'id'
+REVOKE SELECT (id) ON universidad.persona FROM alex;
 ```
