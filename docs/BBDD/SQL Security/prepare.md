@@ -10,18 +10,21 @@ Esto es especialmente útil en consultas que se vayan a ejecutar varias veces se
 Aparte, nos permite evitar varios casos de inyección SQL.
 "
 ---
+- [Sintaxis del predicado](#sintaxis-del-predicado)
 - [Proceso a seguir](#proceso-a-seguir)
 
 {{ page.description }}
 
-Ejemplo de sintaxis a seguir:
+> Podemos preparar consultas *(SQL dinámico)* dentro de procedimientos y a pelo en la consola de SQL que nos proporciona phpMyAdmin. **No** se pueden usar consultas preparadas en disparadores o funciones.
+
+## Sintaxis del predicado
 
 ```sql
 SELECT * FROM products 
 WHERE productCode = ?;
 ```
 
-> Los `?` son los huecos que dejamos libres para luego realizar la llamada.
+Los `?` son los huecos que dejamos libres para luego realizar la llamada.
 
 ## Proceso a seguir
 
