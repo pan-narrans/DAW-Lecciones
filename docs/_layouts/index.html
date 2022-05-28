@@ -9,17 +9,17 @@ layout: page
 
 {{ page.content }}
 
-{%- assign lecciones = site.pages | where:"subject", page.subject | group_by:"category" -%}
+{%- assign lecciones = site.pages | where:"subject", page.subject | sort: "category-weight" | group_by:"category" -%}
 
 <!-- TABLE OF CONTENTS -->
 <section id="table-of-contents">
   <h2>Tabla de contenidos:</h2>
-  {%- for category in lecciones -%}
-    {%- unless category.name == "" -%}
+  {%- for group in lecciones  -%}
+    {%- unless group.name == "" -%}
     <figure>
-      <figcaption><b>{{ category.name }}:</b></figcaption
+      <figcaption><b>{{ group.name }}:</b></figcaption>
       <ul>
-      {%- for page in category.items -%}
+      {%- for page in group.items -%}
         {%- unless page.menu-item -%}
 
         <!--  -->
@@ -41,13 +41,13 @@ layout: page
 
 <!-- SECTIONS FOR LESSONS -->
 <section id="lessons">
-  {%- for category in lecciones -%}
+  {%- for group in lecciones -%}
     <section class="lesson">
-      {%- unless category.name == "" -%}
-        <h2>{{ category.name }}:</h2>
+      {%- unless group.name == "" -%}
+        <h2>{{ group.name }}:</h2>
         <hr>
 
-        {%- for page in category.items -%}
+        {%- for page in group.items -%}
           {%- unless page.menu-item -%}
 
           <!--  -->

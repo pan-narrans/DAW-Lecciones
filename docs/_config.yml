@@ -62,82 +62,57 @@ kramdown:
 
 header_pages:
   - BBDD/index.html
-  - Marcas/index.html
   - Fol/index.html
+  - Marcas/index.html
   - about.md
 
 defaults:
 # Bases de datos
-  -
+  - 
     scope:
       path: "BBDD"
       type: "pages"
     values:
       layout: "page"
       subject: "BBDD"
-  -
-    scope:
-      path: "BBDD/SQL Coding"
+  - 
+    scope: { path: "BBDD/Consultas" }
     values:
-      category: "Programación SQL"
-  -
-    scope:
-      path: "BBDD/SQL Security"
+      category-weight: 1
+      category: Consultas y Vistas
+  - 
+    scope: { path: "BBDD/SQL Coding" }
     values:
-      category: "Seguridad SQL"
-  -
-    scope:
-      path: "BBDD/Consultas"
+      category-weight: 2
+      category: Programación SQL
+  - 
+    scope: { path: "BBDD/SQL Security" }
     values:
-      category: "Consultas y Vistas"
-
-# Marcas
-  -
-    scope:
-      path: Marcas
-      type: pages
-    values:
-      layout: page
-      subject: marcas
-  -
-    scope:
-      path: Marcas/html-css
-    values:
-      category: HTML / CSS
-  -
-    scope:
-      path: Marcas/xml
-    values:
-      category: XML
-  -
-    scope:
-      path: Marcas/js
-    values:
-      category: Intro Js
+      category-weight: 3
+      category: Seguridad SQL
 
 # Fol
-  -
-    scope:
+  - scope:
       path: Fol
       type: pages
     values:
       layout: page
       subject: fol
-  -
-    scope:
-      path: Fol/Trimestre 1
+  - 
+    scope: { path: Fol/Trimestre 1 }
     values:
       layout: page
+      category-weight: 1
       category: 1er Trimestre
-  -
-    scope:
-      path: Fol/Trimestre 2
+  - 
+    scope: { path: Fol/Trimestre 2 }
     values:
       layout: page
+      category-weight: 2
       category: 2do Trimestre
-  -
-    scope:
-      path: Fol/Trimestre 3
+  - 
+    scope: { path: Fol/Trimestre 3 }
     values:
       layout: page
+      category-weight: 3
       category: 3er Trimestre
