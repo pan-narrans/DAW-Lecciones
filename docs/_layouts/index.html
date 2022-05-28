@@ -2,59 +2,74 @@
 layout: page
 ---
 
+
+{%- if page.description -%}
+<p>{{ page.description }}</p>
+{%- endif -%}
+
 {{ page.content }}
 
-{%- assign lecciones = site.pages | where:"subject", "BBDD" | group_by:"category" -%}
+{%- assign lecciones = site.pages | where:"subject", page.subject | group_by:"category" -%}
 
-<h2>Tabla de contenidos:</h2>
-{%- for category in lecciones -%}
-  {%- unless category.name == "" -%}
-  <figure>
-    <figcaption>{{ category.name }}:</figcaption
-    <ul>
-    {%- for page in category.items -%}
-      {%- unless page.menu-item -%}
+<!-- TABLE OF CONTENTS -->
+<section id="table-of-contents">
+  <h2>Tabla de contenidos:</h2>
+  {%- for category in lecciones -%}
+    {%- unless category.name == "" -%}
+    <figure>
+      <figcaption><b>{{ category.name }}:</b></figcaption
+      <ul>
+      {%- for page in category.items -%}
+        {%- unless page.menu-item -%}
 
-      <!--  -->
-      {%- if page.title -%}
-        <a href="#{{ page.title }}">
-          <li style="list-style: none;">{{ page.title }}</li>
-        </a>
-      {%- endif -%}
+        <!--  -->
+        {%- if page.title -%}
+          <a href="#{{ page.title }}">
+            <li style="list-style: none; padding-left: 2%;">{{ page.title }}</li>
+          </a>
+        {%- endif -%}
 
+        {%- endunless -%}
+      {% endfor %}
+      </ul>
+    </figure>
+    {%- endunless -%}
+  {% endfor %}
+</section>
+<!-- END TABLE OF CONTENTS -->
+
+
+<!-- SECTIONS FOR LESSONS -->
+<section id="lessons">
+  {%- for category in lecciones -%}
+    <section class="lesson">
+      {%- unless category.name == "" -%}
+        <h2>{{ category.name }}:</h2>
+        <hr>
+
+        {%- for page in category.items -%}
+          {%- unless page.menu-item -%}
+
+          <!--  -->
+          {%- if page.title -%}
+            <h3  id="{{ page.title }}">{{ page.title }}:</h3>
+          {%- endif -%}
+
+          <p>{{ page.description | markdownify }}</p>
+
+          {%- if page.title -%}
+          <p> <a class="page-link" href="{{ page.url | relative_url }}">
+            <button type="button" class="btn btn-outline-secondary btn-sm"> 
+              <i class="bi bi-caret-right"></i> Para más info pincha aquí 
+            </button>
+          </a> </p>
+          {%- endif -%}
+
+          {%- endunless -%}
+        {% endfor %}
+
+        <br>
       {%- endunless -%}
-    {% endfor %}
-    </ul>
-  </figure>
-  {%- endunless -%}
-{% endfor %}
-
-{%- for category in lecciones -%}
-  {%- unless category.name == "" -%}
-    <h2>{{ category.name }}:</h2>
-    <hr>
-
-    {%- for page in category.items -%}
-      {%- unless page.menu-item -%}
-
-      <!--  -->
-      {%- if page.title -%}
-        <h3  id="{{ page.title }}">{{ page.title }}:</h3>
-      {%- endif -%}
-
-      <p>{{ page.description | markdownify }}</p>
-
-      {%- if page.title -%}
-      <p> <a class="page-link" href="{{ page.url | relative_url }}">
-        <button type="button" class="btn btn-light btn-sm"> 
-          <i class="bi bi-caret-right"></i> Para más info pincha aquí 
-        </button>
-      </a> </p>
-      {%- endif -%}
-
-      {%- endunless -%}
-    {% endfor %}
-
-    <br>
-  {%- endunless -%}
-{% endfor %}
+    </section>
+  {% endfor %}
+</section>
