@@ -1,26 +1,8 @@
 ---
 title: La representación de los trabajadores. Conflicto y trabajo en equipo
+description: ""
 ---
 
-# **La representación colectiva**
-
-```cmd
-==============================================
-Tema 6. La representación de los trabajadores. 
-        Conflicto y trabajo en equipo.
-==============================================
-
-@autor: Cristina Pascua
-@autor: Alejandro Pérez
-```
-
-- [**La representación colectiva**](#la-representación-colectiva)
-  - [La representación colectiva unitaria](#la-representación-colectiva-unitaria)
-    - [Delegados de personal (<50 trabajadores)](#delegados-de-personal-50-trabajadores)
-    - [Comité de empresa (+50 trabajadores)](#comité-de-empresa-50-trabajadores)
-    - [Garantías](#garantías)
-    - [Competencias](#competencias)
-  - [La representación colectiva sindical](#la-representación-colectiva-sindical)
 - [Los conflictos colectivos](#los-conflictos-colectivos)
   - [La huelga](#la-huelga)
   - [Las huelgas ilícitas](#las-huelgas-ilícitas)
