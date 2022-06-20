@@ -61,35 +61,62 @@ kramdown:
 #   - vendor/ruby/
 
 header_pages:
-  - BBDD/index.html
+  - BBDD/index.md
   - Fol/index.html
   - Marcas/index.html
   - about.md
 
 defaults:
 # Bases de datos
-  - 
-    scope:
+  - scope:
       path: "BBDD"
       type: "pages"
     values:
       layout: "page"
       subject: "BBDD"
   - 
-    scope: { path: "BBDD/Consultas" }
+    scope: { path: "BBDD/DDL" }
     values:
       category-weight: 1
-      category: Consultas y Vistas
+      category: Lenguaje de Definición de Datos
+  - 
+    scope: { path: "BBDD/DML" }
+    values:
+      category-weight: 2
+      category: Lenguaje de Modificación de Datos
+  - 
+    scope: { path: "BBDD/DQL" }
+    values:
+      category-weight: 3
+      category: Lenguaje de Consulta de Datos
+  - 
+    scope: { path: "BBDD/DCL" }
+    values:
+      category-weight: 4
+      category: Lenguaje de Control de Datos
   - 
     scope: { path: "BBDD/SQL Coding" }
     values:
-      category-weight: 2
+      category-weight: 5
       category: Programación SQL
+  - 
+    scope: { path: "BBDD/SQL Aux Functions" }
+    values:
+      category-weight: 6
+      category: Funciones Auxiliares de SQL
   - 
     scope: { path: "BBDD/SQL Security" }
     values:
-      category-weight: 3
+      category-weight: 30
       category: Seguridad SQL
+
+# Marcas
+  - scope:
+      path: Marcas
+      type: pages
+    values:
+      layout: page
+      subject: Marcas
 
 # Fol
   - scope:

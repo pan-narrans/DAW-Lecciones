@@ -7,19 +7,23 @@ layout: page
 <p>{{ page.description }}</p>
 {%- endif -%}
 
-{{ page.content }}
+{{ page.content | markdownify }}
 
-{%- assign lecciones = site.pages | where:"subject", page.subject | sort: "category-weight" | group_by:"category" -%}
+{%- assign lecciones = site.pages | where:"subject", page.subject | sort: "category-weight" | group_by:"category"  -%}
 
 <!-- TABLE OF CONTENTS -->
 <section id="table-of-contents">
   <h2>Tabla de contenidos:</h2>
   {%- for group in lecciones  -%}
     {%- unless group.name == "" -%}
+
+    <!-- Sort pages by path -->
+    {%- assign ordered = group.items | sort: "path" -%}
+    
     <figure>
       <figcaption><b>{{ group.name }}:</b></figcaption>
       <ul>
-      {%- for page in group.items -%}
+      {%- for page in ordered -%}
         {%- unless page.menu-item -%}
 
         <!--  -->
@@ -28,6 +32,8 @@ layout: page
             <li style="list-style: none; padding-left: 2%;">{{ page.title }}</li>
           </a>
         {%- endif -%}
+
+        
 
         {%- endunless -%}
       {% endfor %}
@@ -42,34 +48,34 @@ layout: page
 <!-- SECTIONS FOR LESSONS -->
 <section id="lessons">
   {%- for group in lecciones -%}
-    <section class="lesson">
-      {%- unless group.name == "" -%}
+    {%- unless group.name == "" -%}
+
+    <!-- Sort pages by path -->
+    {%- assign ordered = group.items | sort: "path" -%}
+    
+      <section class="lesson">
         <h2>{{ group.name }}:</h2>
         <hr>
 
-        {%- for page in group.items -%}
-          {%- unless page.menu-item -%}
+        {%- for page in ordered -%}
 
           <!--  -->
           {%- if page.title -%}
-            <h3  id="{{ page.title }}">{{ page.title }}:</h3>
+            <h3  id="{{ page.title }}">{{ page.title | append: ':' | markdownify}}</h3>
+            <p>{{ page.description | markdownify }}</p>
+            <p> <a class="page-link" href="{{ page.url | relative_url }}">
+              <button type="button" class="btn btn-outline btn-sm"> 
+                <i class="bi bi-caret-right"></i> Para más info pincha aquí 
+              </button>
+            </a> </p>
+          {%- else -%}
+            {{ page.content }}
           {%- endif -%}
 
-          <p>{{ page.description | markdownify }}</p>
-
-          {%- if page.title -%}
-          <p> <a class="page-link" href="{{ page.url | relative_url }}">
-            <button type="button" class="btn btn-outline-secondary btn-sm"> 
-              <i class="bi bi-caret-right"></i> Para más info pincha aquí 
-            </button>
-          </a> </p>
-          {%- endif -%}
-
-          {%- endunless -%}
         {% endfor %}
 
         <br>
-      {%- endunless -%}
-    </section>
+      </section>
+    {%- endunless -%}
   {% endfor %}
 </section>
