@@ -55,7 +55,7 @@ Enter password: ********
 
 ## Privilegios
 
-Estos son los privilegios que podemos conceder:
+Estos son algunos de los privilegios que podemos conceder:
 
 - `SELECT`
 - `UPDATE`
